@@ -59,4 +59,3 @@ $ yarn test
 ## Screenshots of mocks
 
 ![Mocks](screenshots/mock.PNG)
-![Mocks](screenshots/mock-goalie.PNG)
