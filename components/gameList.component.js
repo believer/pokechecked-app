@@ -1,37 +1,46 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Card, List, Text, Layout} from '@ui-kitten/components';
+import {Card, List, Text, Layout, Button, Modal} from '@ui-kitten/components';
+import {useQuery} from 'react-query';
 import {getHighlights} from '@jimjardland/nhl';
-
-const data = [
-  new Array(2).fill({
-    title: 'Itemb',
-  }),
-  new Array(2).fill({
-    title: 'Itema',
-  }),
-];
+import {VideoModal} from '../components/videoModal.component';
 
 export const GameList = () => {
-  const renderItem = (days) => {
-    console.log('tja', days);
+  const [video, showVideo] = React.useState({
+    visible: false,
+    url: null,
+  });
+
+  const {isLoading, isError, error, data} = useQuery('highlights', () =>
+    getHighlights('2021-02-21', '2021-02-22'),
+  );
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (isError) {
+    return <Text>Error: {error.message}</Text>;
+  }
+
+  if (!data) {
+    return <Text>Missing data</Text>;
+  }
+
+  const renderItem = (data) => {
     return (
-      <Layout key={days.index}>
-        <Text>Datum {days.index}</Text>
-        {days.item.map((info) => {
+      <Layout key={data.item.index}>
+        <Text>Datum {data.item.day}</Text>
+        {data.item.games.map((game) => {
           return (
-            <Card
-              key={info.title + Math.random()}
-              style={styles.item}
-              status="basic">
+            <Card key={game.arena} style={styles.item} status="basic">
               <Text>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged.
+                {game.homeTeam} - {game.awayTeam}
+                {game.url}
               </Text>
+              <Button onPress={() => showVideo({url: game.url, visible: true})}>
+                TOGGLE MODAL
+              </Button>
             </Card>
           );
         })}
@@ -41,6 +50,14 @@ export const GameList = () => {
 
   return (
     <>
+      <Modal
+        visible={video.visible}
+        backdropStyle={styles.backdrop}
+        onBackdropPress={() => showVideo({url: null, visible: false})}>
+        <Card disabled={true}>
+          <VideoModal url={video.url} />
+        </Card>
+      </Modal>
       <List
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
@@ -58,5 +75,16 @@ const styles = StyleSheet.create({
   },
   item: {
     marginVertical: 4,
+  },
+  videoContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+
+  container: {
+    minHeight: 192,
+  },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });
