@@ -3,16 +3,10 @@ import {StyleSheet, View} from 'react-native';
 import {Card, List, Text, Layout, Button, Modal} from '@ui-kitten/components';
 import {useQuery} from 'react-query';
 import {getHighlights} from '@jimjardland/nhl';
-import {VideoModal} from '../components/videoModal.component';
 
-export const GameList = () => {
-  const [video, showVideo] = React.useState({
-    visible: false,
-    url: null,
-  });
-
+export const GameList = ({navigation}) => {
   const {isLoading, isError, error, data} = useQuery('highlights', () =>
-    getHighlights('2021-02-21', '2021-02-22'),
+    getHighlights(),
   );
 
   if (isLoading) {
@@ -38,9 +32,12 @@ export const GameList = () => {
                 {game.homeTeam} - {game.awayTeam}
                 {game.url}
               </Text>
-              <Button onPress={() => showVideo({url: game.url, visible: true})}>
-                TOGGLE MODAL
-              </Button>
+              {game.url ? (
+                <Button
+                  onPress={() => navigation.navigate('Video', {url: game.url})}>
+                  Play video
+                </Button>
+              ) : null}
             </Card>
           );
         })}
@@ -49,22 +46,12 @@ export const GameList = () => {
   };
 
   return (
-    <>
-      <Modal
-        visible={video.visible}
-        backdropStyle={styles.backdrop}
-        onBackdropPress={() => showVideo({url: null, visible: false})}>
-        <Card disabled={true}>
-          <VideoModal url={video.url} />
-        </Card>
-      </Modal>
-      <List
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-        data={data}
-        renderItem={renderItem}
-      />
-    </>
+    <List
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      data={data}
+      renderItem={renderItem}
+    />
   );
 };
 

@@ -1,4 +1,5 @@
 {
   "name": "pokechecked",
-  "displayName": "pokechecked"
+  "displayName": "pokechecked",
+  "schema": "pokechecked://"
 }

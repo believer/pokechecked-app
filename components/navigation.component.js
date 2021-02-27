@@ -1,27 +1,28 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Layout, Tab, TabView, Text} from '@ui-kitten/components';
+import {StatusBar} from 'react-native';
+import {schema} from '../app.json';
 import {Games} from './games.component';
+import {VideoModal} from './videoModal.component';
 
-export const Navigation = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+const {Navigator, Screen} = createStackNavigator();
 
+const HomeNavigator = () => (
+  <Navigator headerMode="none">
+    <Screen name="Games" component={Games} />
+    <Screen name="Video" component={VideoModal} />
+  </Navigator>
+);
+
+const linking = {
+  prefixes: [schema],
+};
+export const AppNavigator = () => {
   return (
-    <TabView
-      selectedIndex={selectedIndex}
-      onSelect={(index) => setSelectedIndex(index)}>
-      <Tab title="Games">
-        <Layout style={styles.tabContainer}>
-          <Games />
-        </Layout>
-      </Tab>
-    </TabView>
+    <NavigationContainer linking={linking}>
+      <StatusBar />
+      <HomeNavigator />
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  tabContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
