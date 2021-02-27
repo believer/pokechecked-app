@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@eva-design/eva": "2.0.0",
-    "@jimjardland/nhl": "^1.4.0",
+    "@jimjardland/nhl": "^1.5.0",
     "@react-native-masked-view/masked-view": "^0.2.2",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
