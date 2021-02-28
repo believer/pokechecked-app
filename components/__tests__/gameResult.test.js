@@ -124,7 +124,8 @@ test('it shows goals for away and home team', () => {
 
 test('it shows time of goal', () => {
   const screen = setup()
-  expect(screen.getByText('1st - 18:20')).toBeTruthy()
+  expect(screen.getByText('1st')).toBeTruthy()
+  expect(screen.getByText('18:20')).toBeTruthy()
 })
 
 test('it shows scorer', () => {

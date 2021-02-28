@@ -1,7 +1,6 @@
 import React from 'react'
-import { List, Layout } from '@ui-kitten/components'
 import { useQuery } from 'react-query'
-import { TouchableOpacity, StyleSheet, View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import { getHighlights } from '@jimjardland/nhl'
 import { Game } from './game.component'
 
@@ -24,14 +23,22 @@ export const GameList = ({ navigation }) => {
 
   const renderItem = (data) => {
     return (
-      <Layout key={data.item.index}>
-        <Text style={{ color: '#fff', flex: 1 }}>{data.item.day}</Text>
-        {data.item.games.map((game) => (
+      <View key={data.day}>
+        <Text style={{ color: '#fff', flex: 1 }}>{data.day}</Text>
+        {data.games.map((game) => (
           <Game key={game.arena} game={game} navigation={navigation} />
         ))}
-      </Layout>
+      </View>
     )
   }
 
-  return <List data={data} renderItem={renderItem} />
+  return (
+    <ScrollView>
+      <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+        {data.map((day) => {
+          return renderItem(day)
+        })}
+      </View>
+    </ScrollView>
+  )
 }
