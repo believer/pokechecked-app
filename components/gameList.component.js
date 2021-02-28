@@ -23,22 +23,34 @@ export const GameList = ({ navigation }) => {
 
   const renderItem = (data) => {
     return (
-      <View key={data.day}>
-        <Text style={{ color: '#fff', flex: 1 }}>{data.day}</Text>
-        {data.games.map((game) => (
-          <Game key={game.arena} game={game} navigation={navigation} />
+      <View key={data.day} style={{ marginTop: 20 }}>
+        <Text
+          style={{ color: '#fff', flex: 1, fontWeight: '700', marginLeft: 30 }}
+        >
+          {data.day}
+        </Text>
+        {data.games.map((game, index) => (
+          <Game
+            key={game.arena}
+            game={game}
+            index={index}
+            navigation={navigation}
+          />
         ))}
       </View>
     )
   }
 
   return (
-    <ScrollView>
-      <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-        {data.map((day) => {
-          return renderItem(day)
-        })}
-      </View>
-    </ScrollView>
+    <View
+      style={{
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      {data.map((day) => {
+        return renderItem(day)
+      })}
+    </View>
   )
 }

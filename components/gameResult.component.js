@@ -1,34 +1,7 @@
 import React from 'react'
 import { Image, View, Text } from 'react-native'
 import Star from '../assets/star'
-
-const Scorer = ({ align = 'left', display, goal }) => {
-  if (!display) {
-    return <View style={{ flex: 1 }} />
-  }
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Text
-        style={{
-          textAlign: align,
-          color: '#fff',
-          fontWeight: '700',
-        }}
-      >
-        {goal.scorer.player.fullName}
-      </Text>
-      {goal.assist.map((assist) => (
-        <Text
-          style={{ textAlign: align, color: '#fff', fontSize: 12 }}
-          key={assist.personInfo.id}
-        >
-          {assist.player.fullName}
-        </Text>
-      ))}
-    </View>
-  )
-}
+import { Scorer } from './scorer.component'
 
 export const GameResult = ({
   game: { stars, scorers, homeGoals, awayGoals },
@@ -40,7 +13,7 @@ export const GameResult = ({
           textAlign: 'center',
           color: '#fff',
           fontWeight: '700',
-          marginVertical: 16,
+          paddingBottom: 14,
         }}
       >
         {awayGoals} - {homeGoals}
@@ -52,14 +25,16 @@ export const GameResult = ({
           <View style={{ marginHorizontal: 12 }}>
             <Text
               style={{
-                color: '#fff',
+                color: '#8975C0',
                 textAlign: 'center',
                 fontWeight: '700',
               }}
             >
               {goal.time}
             </Text>
-            <Text style={{ color: '#fff', textAlign: 'center', fontSize: 12 }}>
+            <Text
+              style={{ color: '#8975C0', textAlign: 'center', fontSize: 12 }}
+            >
               {goal.period}
             </Text>
           </View>
@@ -68,16 +43,39 @@ export const GameResult = ({
       ))}
 
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        {stars.map((star, index) => (
-          <View key={star.id} style={{ flex: 1 }}>
-            <Image
-              source={{ uri: star.image }}
-              style={{ flex: 1, width: 40, height: 40, borderRadius: 150 / 2 }}
-            />
-            <Text style={{ color: '#fff', textAlign: 'center', fontSize: 12 }}>
-              {star.fullName}
+        {stars.map((star, i) => (
+          <View key={star.id} style={{ padding: 14 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <Image
+                source={{ uri: star.image }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 150 / 2,
+                  justifyContent: 'center',
+                }}
+              />
+            </View>
+            <Text
+              style={{
+                color: '#FFF',
+                textAlign: 'center',
+                fontWeight: '400',
+              }}
+            >
+              {star.fullName.split(' ')[1]}
             </Text>
-            <Star />
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                paddingTop: 4,
+              }}
+            >
+              {new Array(i + 1).fill(0).map((_) => (
+                <Star />
+              ))}
+            </View>
           </View>
         ))}
       </View>
