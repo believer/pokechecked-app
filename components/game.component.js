@@ -1,48 +1,81 @@
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Card, Text, Button} from '@ui-kitten/components';
-import {GameResult} from './gameResult.component';
+import React from 'react'
+import { TouchableOpacity, View, Text, Image } from 'react-native'
+import { GameResult } from './gameResult.component'
+import Icon from '../assets/play-icon'
+import logos from '../assets/logos'
 
-export const Game = ({game, navigation}) => {
+export const Game = ({ game, navigation }) => {
+  const [showResult, setShowResult] = React.useState(false)
+
+  const getLogoName = (name) =>
+    `${name.split(' ').slice(-1).pop().toLowerCase()}`
+
   return (
-    <Card key={game.arena} style={styles.item} status="basic">
-      <Text>
-        {game.homeTeam} - {game.awayTeam}
-      </Text>
-      {game.url ? (
+    <View style={{ marginBottom: 20 }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Image
+          source={logos[getLogoName(game.awayTeam)].standard}
+          style={{ flex: 1, width: 90, height: 74 }}
+        />
+        <Text style={{ color: '#fff', flex: 1, textAlign: 'center' }}>
+          {game.awayTeam}
+        </Text>
+        <TouchableOpacity onPress={() => setShowResult(!showResult)}>
+          <View
+            style={{
+              backgroundColor: showResult ? '#fff' : 'transparent',
+              borderColor: '#fff',
+              borderWidth: 2,
+              borderRadius: 100,
+              paddingHorizontal: 16,
+              paddingVertical: 4,
+            }}
+          >
+            <Text
+              style={{
+                color: showResult ? '#000' : '#fff',
+              }}
+            >
+              Result
+            </Text>
+          </View>
+        </TouchableOpacity>
+        {game.url ? (
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Video', { url: game.url })}
+            >
+              <View>
+                <Icon />
+              </View>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+        <Text
+          style={{
+            color: '#fff',
+            flex: 1,
+            textAlign: 'center',
+          }}
+        >
+          {game.homeTeam}
+        </Text>
+        <Image
+          source={logos[getLogoName(game.homeTeam)].standard}
+          style={{ flex: 1, width: 90, height: 74 }}
+        />
+      </View>
+      {game.gameIsFinished && showResult ? (
         <>
-          <Button onPress={() => navigation.navigate('Video', {url: game.url})}>
-            Play video
-          </Button>
-        </>
-      ) : null}
-      {game.gameIsFinished ? (
-        <>
-          <Button onPress={() => console.log('tja')}>Result</Button>
           <GameResult game={game} />
         </>
       ) : null}
-    </Card>
-  );
-};
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-  },
-  item: {
-    marginVertical: 4,
-  },
-  videoContainer: {
-    flex: 1,
-    backgroundColor: 'black',
-  },
-
-  container: {
-    minHeight: 192,
-  },
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-});
+    </View>
+  )
+}
