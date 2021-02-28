@@ -141,7 +141,6 @@ test('it shows assist', () => {
 
 test('it shows stars', () => {
   const screen = setup()
-  expect(screen.getByText('Yung Lean')).toBeTruthy()
-  expect(screen.getByText('Lil Tracy')).toBeTruthy()
-  expect(screen.getByText('Chance The Rapper')).toBeTruthy()
+  expect(screen.getByText('Lean')).toBeTruthy()
+  expect(screen.getByText('Tracy')).toBeTruthy()
 })
