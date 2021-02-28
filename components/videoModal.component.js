@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import VideoPlayer from 'react-native-video-controls';
 import Orientation from 'react-native-orientation-locker';
 import {StatusBar} from 'react-native';
@@ -23,10 +22,3 @@ export const VideoModal = ({navigation, route: {params}}) => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  video: {
-    minHeight: 180,
-    minWidth: 200,
-  },
-});

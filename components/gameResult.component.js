@@ -1,8 +1,10 @@
-import React from 'react';
-import {Card, Text, Button} from '@ui-kitten/components';
-import {Image} from 'react-native';
+import React from 'react'
+import { Card, Text, Button } from '@ui-kitten/components'
+import { Image } from 'react-native'
 
-export const GameResult = ({game: {stars, scorers, homeGoals, awayGoals}}) => {
+export const GameResult = ({
+  game: { stars, scorers, homeGoals, awayGoals },
+}) => {
   return (
     <>
       <Text>
@@ -20,19 +22,17 @@ export const GameResult = ({game: {stars, scorers, homeGoals, awayGoals}}) => {
               <Text key={assist.personInfo.id}>{assist.player.fullName}</Text>
             ))}
           </Card>
-        );
+        )
       })}
 
       {stars.map((star) =>
         star.id ? (
-          <Card key={star.fullName}>
-            <Image uri={star.image} style={{width: 40, height: 40}} />
-            <Text>
-              star {star.fullName} {star.id} {star.image}
-            </Text>
+          <Card key={star.id}>
+            <Image uri={star.image} style={{ width: 40, height: 40 }} />
+            <Text>{star.fullName}</Text>
           </Card>
-        ) : null,
+        ) : null
       )}
     </>
-  );
-};
+  )
+}
