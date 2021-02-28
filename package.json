@@ -20,7 +20,7 @@
     "luxon": "^1.26.0",
     "moment": "^2.29.1",
     "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react-native": "0.63.4",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-orientation-locker": "^1.2.0",
