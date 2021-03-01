@@ -20,8 +20,8 @@ export const GameResult = ({
         {awayGoals} - {homeGoals}
       </Text>
 
-      {scorers.map((goal) => (
-        <View style={{ flexDirection: 'row', marginBottom: 12 }} key={goal.id}>
+      {scorers.map((goal, i) => (
+        <View style={{ flexDirection: 'row', marginBottom: 12 }} key={i}>
           <Scorer goal={goal} display={!goal.homeTeamScored} align="right" />
           <View style={{ marginHorizontal: 12 }}>
             <Text
@@ -51,7 +51,7 @@ export const GameResult = ({
 
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         {stars.map((star, i) => (
-          <View key={star.id} style={{ padding: 14 }}>
+          <View key={i} style={{ padding: 14 }}>
             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
               <Image
                 source={{ uri: star.image }}
@@ -81,8 +81,8 @@ export const GameResult = ({
                 paddingTop: 4,
               }}
             >
-              {new Array(i + 1).fill(0).map((_) => (
-                <Star />
+              {new Array(i + 1).fill(0).map((_, i) => (
+                <Star key={i} />
               ))}
             </View>
           </View>
