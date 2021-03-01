@@ -12,7 +12,8 @@ export const Scorer = ({ align = 'left', display, goal }) => {
         style={{
           textAlign: align,
           color: '#fff',
-          fontWeight: '700',
+          fontFamily: 'ZillaSlab-Bold',
+          fontSize: 13,
         }}
       >
         {goal.scorer.player.fullName}
@@ -24,7 +25,7 @@ export const Scorer = ({ align = 'left', display, goal }) => {
               textAlign: align,
               color: '#fff',
               fontSize: 12,
-              fontWeight: '400',
+              fontFamily: 'ZillaSlab-Regular',
             }}
             key={assist.personInfo.id}
           >
@@ -37,7 +38,7 @@ export const Scorer = ({ align = 'left', display, goal }) => {
             textAlign: align,
             color: '#fff',
             fontSize: 12,
-            fontWeight: '400',
+            fontFamily: 'ZillaSlab-Regular',
           }}
         >
           Unassisted

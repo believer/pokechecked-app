@@ -4,6 +4,7 @@ import { GameResult } from './gameResult.component'
 import Icon from '../assets/play-icon'
 import logos from '../assets/logos'
 import Clock from '../assets/clock'
+import Fold from '../assets/fold'
 import moment from 'moment'
 
 export const Game = ({ game, navigation, index }) => {
@@ -15,8 +16,8 @@ export const Game = ({ game, navigation, index }) => {
   return (
     <View
       style={{
-        paddingBottom: 40,
-        backgroundColor: index % 2 == 0 ? 'rgba(20,9,51,0.2)' : null,
+        padding: 30,
+        backgroundColor: index % 2 == 1 ? 'rgba(20,9,51,0.2)' : null,
       }}
     >
       <View
@@ -39,7 +40,8 @@ export const Game = ({ game, navigation, index }) => {
             style={{
               color: '#FFF',
               textAlign: 'center',
-              fontWeight: '700',
+              fontFamily: 'ZillaSlab-SemiBold',
+              fontSize: 14,
             }}
           >
             {game.awayTeam}
@@ -51,7 +53,13 @@ export const Game = ({ game, navigation, index }) => {
           }}
         >
           {game.url ? (
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 30,
+                justifyContent: 'center',
+              }}
+            >
               <TouchableOpacity
                 onPress={() => navigation.navigate('Video', { url: game.url })}
               >
@@ -71,14 +79,18 @@ export const Game = ({ game, navigation, index }) => {
                   borderRadius: 100,
                   paddingHorizontal: 16,
                   paddingVertical: 4,
+                  marginTop: 30,
                 }}
               >
                 <Text
                   style={{
-                    color: showResult ? '#000' : '#fff',
+                    color: showResult ? '#2A146A' : '#fff',
+                    fontFamily: 'Barlow-Bold',
+                    fontSize: 13,
                   }}
                 >
-                  Result
+                  {showResult ? <Fold /> : null}
+                  RESULT
                 </Text>
               </View>
             </TouchableOpacity>
@@ -87,7 +99,8 @@ export const Game = ({ game, navigation, index }) => {
               style={{
                 color: '#FFF',
                 textAlign: 'center',
-                fontWeight: '700',
+                fontSize: 13,
+                fontFamily: 'Barlow-SemiBold',
               }}
             >
               <Clock />
@@ -109,7 +122,8 @@ export const Game = ({ game, navigation, index }) => {
             style={{
               color: '#FFF',
               textAlign: 'center',
-              fontWeight: '700',
+              fontFamily: 'ZillaSlab-SemiBold',
+              fontSize: 14,
             }}
           >
             {game.homeTeam}

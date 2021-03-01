@@ -51,6 +51,11 @@
     "pretty-quick": "^3.1.0",
     "react-test-renderer": "16.11.0"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "jest": {
     "preset": "react-native",
     "transformIgnorePatterns": []

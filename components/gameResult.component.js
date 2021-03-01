@@ -14,6 +14,7 @@ export const GameResult = ({
           color: '#fff',
           fontWeight: '700',
           paddingBottom: 14,
+          marginTop: 16,
         }}
       >
         {awayGoals} - {homeGoals}
@@ -27,13 +28,19 @@ export const GameResult = ({
               style={{
                 color: '#8975C0',
                 textAlign: 'center',
-                fontWeight: '700',
+                fontFamily: 'ZillaSlab-Bold',
+                fontSize: 13,
               }}
             >
               {goal.time}
             </Text>
             <Text
-              style={{ color: '#8975C0', textAlign: 'center', fontSize: 12 }}
+              style={{
+                color: '#8975C0',
+                textAlign: 'center',
+                fontFamily: 'ZillaSlab-Regular',
+                fontSize: 13,
+              }}
             >
               {goal.period}
             </Text>
@@ -60,7 +67,9 @@ export const GameResult = ({
               style={{
                 color: '#FFF',
                 textAlign: 'center',
-                fontWeight: '400',
+                marginTop: 2,
+                fontSize: 13,
+                fontFamily: 'ZillaSlab-Bold',
               }}
             >
               {star.fullName.split(' ')[1]}
