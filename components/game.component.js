@@ -95,17 +95,25 @@ export const Game = ({ game, navigation, index }) => {
               </View>
             </TouchableOpacity>
           ) : (
-            <Text
+            <View
               style={{
-                color: '#FFF',
-                textAlign: 'center',
-                fontSize: 13,
-                fontFamily: 'Barlow-SemiBold',
+                flexDirection: 'row',
               }}
             >
-              <Clock />
-              {moment(game.date).format('HH:mm')}
-            </Text>
+              <Clock style={{ flex: 1, marginTop: 3 }} />
+              <Text
+                style={{
+                  color: '#FFF',
+                  textAlign: 'center',
+                  marginLeft: 5,
+                  marginTop: 0,
+                  fontSize: 13,
+                  fontFamily: 'Barlow-SemiBold',
+                }}
+              >
+                {moment(game.date).format('HH:mm')}
+              </Text>
+            </View>
           )}
         </View>
 

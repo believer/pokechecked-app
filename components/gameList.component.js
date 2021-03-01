@@ -30,7 +30,7 @@ export const GameList = ({ navigation }) => {
             style={{
               color: '#fff',
               flex: 1,
-              fontFamily: 'ZillaSlab-Regular',
+              fontFamily: 'ZillaSlab-SemiBold',
               fontSize: 18,
               marginLeft: 30,
             }}

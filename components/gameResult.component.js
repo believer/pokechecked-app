@@ -72,7 +72,7 @@ export const GameResult = ({
                 fontFamily: 'ZillaSlab-Bold',
               }}
             >
-              {star.fullName.split(' ')[1]}
+              {star.fullName.split(' ').slice(1).join(' ')}
             </Text>
             <View
               style={{
